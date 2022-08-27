@@ -4,7 +4,8 @@ require_relative '../caesar_cipher'
 RSpec.describe 'Caesar Cipher' do
   describe 'caesar shift' do
     it 'handles the shift' do
-      expect(caesar_cipher("What a string!", 5)).to eq('Bmfy f xywnsl!')
+      solution = Solution.new
+      expect(solution.caesar_cipher("What a string!", 5)).to eq('Bmfy f xywnsl!')
     end
   end
 end

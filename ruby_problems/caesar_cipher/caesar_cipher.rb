@@ -1,36 +1,43 @@
 # Implement a caesar cipher that takes in a string and the
 # shift factor and then outputs the modified string
+class Solution
+  attr_reader :lowercase_range, :uppercase_range
 
-# @param [String] initial_string
-# @param [Integer] num_of_shifts
-def caesar_cipher(initial_string, num_of_shifts)
-  initial_string.split('').reduce('') do |final_str, curr|
-    if letter?(curr)
-      shifted_ord = get_shifted_ord(curr, curr.ord + num_of_shifts)
-      final_str + shifted_ord.chr
-    else
-      final_str + curr
+  def initialize
+    @lowercase_range = (97..122)
+    @uppercase_range = (65..90)
+  end
+
+  # @param [String] initial_string
+  # @param [Integer] num_of_shifts
+  def caesar_cipher(initial_string, num_of_shifts)
+    initial_string.split('').reduce('') do |final_str, curr|
+      if letter?(curr)
+        shifted_ord = get_shifted_ord(curr, curr.ord + num_of_shifts)
+        final_str + shifted_ord.chr
+      else
+        final_str + curr
+      end
     end
   end
-end
 
-# @param [String] original_char
-# @param [Integer] shifted_ord
-def get_shifted_ord(original_char, shifted_ord)
-  lowercase_range = (97..122)
-  uppercase_range = (65..90)
+  # @param [String] original_char
+  # @param [Integer] shifted_ord
+  def get_shifted_ord(original_char, shifted_ord)
+    range_to_use = lowercase?(original_char) ? lowercase_range : uppercase_range
+    shifted_ord -= 26 unless range_to_use.include?(shifted_ord)
+    shifted_ord
+  end
 
-  range_to_use = lowercase?(original_char) ? lowercase_range : uppercase_range
-  shifted_ord -= 26 unless range_to_use.include?(shifted_ord)
-  shifted_ord
-end
+  def lowercase?(char)
+    char.downcase == char
+  end
 
-# @param [String] char
-def letter?(char)
-  char.match(/[[:alpha:]]/)
-end
+  # @param [String] char
+  def letter?(char)
+    ord = char.ord
+    lowercase_range.include?(ord) || uppercase_range.include?(ord)
+  end
 
-# @param [String] char
-def lowercase?(char)
-  char.downcase == char
+  private :lowercase?, :letter?, :get_shifted_ord, :lowercase_range, :uppercase_range
 end
