@@ -21,6 +21,8 @@ class Solution
     end
   end
 
+  private
+
   # @param [String] original_char
   # @param [Integer] shifted_ord
   def get_shifted_ord(original_char, shifted_ord)
@@ -40,5 +42,5 @@ class Solution
     lowercase_range.include?(ord) || uppercase_range.include?(ord)
   end
 
-  private :lowercase?, :letter?, :get_shifted_ord, :lowercase_range, :uppercase_range
+  private :lowercase_range, :uppercase_range
 end

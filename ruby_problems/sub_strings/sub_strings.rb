@@ -13,6 +13,8 @@ class Solution
     end
   end
 
+  private
+
   # @param [String] str
   # @param [String] sub_str
   def substring?(str, sub_str)
@@ -25,6 +27,4 @@ class Solution
     sub_arr = sub_str.chars
     str.each_char.each_cons(sub_str.length).count(sub_arr)
   end
-
-  private :substring?, :count_substrings
 end
